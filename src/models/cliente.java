@@ -1,15 +1,18 @@
 package models;
 
-public class cliente {
+public class Cliente {
 	private String name;
 	private String id;
-	private String placa;
+	private int phone;
+	private String mail;
 	
-	public cliente(String name, String id, String placa) {
+	
+	public Cliente(String name, String id,  int phone, String mail) {
 		super();
 		this.name = name;
 		this.id = id;
-		this.placa = placa;
+		this.phone = phone;
+		this.mail = mail;
 	}
 
 	public String getName() {
@@ -28,12 +31,19 @@ public class cliente {
 		this.id = id;
 	}
 
-	public String getPlaca() {
-		return placa;
+	public void setPhone(int phone) {
+		this.phone = phone;
+	}
+	
+	public int getPhone() {
+		return phone;
+	}
+	public String getMail() {
+		return mail;
 	}
 
-	public void setPlaca(String placa) {
-		this.placa = placa;
+	public void setMail(String mail) {
+		this.mail = mail;
 	}
 	
 	
