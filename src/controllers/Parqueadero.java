@@ -22,5 +22,9 @@ public class Parqueadero {
 				System.out.println (e.getName () + " " + e.getId());
 				}
 		}
+		
+		public Boolean eliminarCliente (String name, String id, int phone, String mail) {
+			
+			return true;
+		}
 }
-	
