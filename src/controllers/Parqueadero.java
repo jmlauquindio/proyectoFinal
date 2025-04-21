@@ -23,8 +23,8 @@ public class Parqueadero {
 				}
 		}
 		
-		public Boolean eliminarCliente (String name, String id, int phone, String mail) {
-			
-			return true;
+		public Boolean eliminarCliente (ArrayList<String> listaClientes, String idCliente) {
+		        return listaClientes.remove(idCliente);
 		}
+		
 }
