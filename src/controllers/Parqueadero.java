@@ -27,4 +27,13 @@ public class Parqueadero {
 		        return listaClientes.remove(idCliente);
 		}
 		
+
+		public void buscarCliente () {
+			for (Cliente e: listasClientes) {
+				if
+				
+				
+			}
+		}
 }
+
