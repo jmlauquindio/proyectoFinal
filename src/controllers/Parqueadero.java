@@ -29,11 +29,16 @@ public class Parqueadero {
 		
 
 		public void buscarCliente () {
-			for (Cliente e: listasClientes) {
-				if
-				
+			for (Cliente e: listasClientes) { 
 				
 			}
+		}
+		public String getListaClientesComoTexto() {
+			String clientes = "";
+			for (Cliente e: listasClientes) {
+				clientes = clientes + " <br> " + e.getName() + " " + e.getId();  
+				}
+			return clientes;
 		}
 }
 
