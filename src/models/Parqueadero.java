@@ -1,6 +1,7 @@
 package models;
 
 import java.util.ArrayList;
+import java.util.LinkedList; 
 
 public class Parqueadero {
     private String nombre;
@@ -86,5 +87,17 @@ public class Parqueadero {
         return "Parqueadero [nombre=" + nombre + ", direccion=" + direccion + ", representante=" + representante
                 + ", espaciosMotos=" + espaciosMotos + ", espaciosAutomoviles=" + espaciosAutomoviles
                 + ", espaciosCamiones=" + espaciosCamiones + "]";
+    }
+
+    public LinkedList<Cliente> obtenerClientesMenoresDeEdad() {
+        LinkedList<Cliente> clientesMenores = new LinkedList<>();
+
+        for (Cliente cliente : clientes) {
+            if (cliente.getEdad() < 18) {
+                clientesMenores.add(cliente);
+            }
+        }
+
+        return clientesMenores;
     }
 }

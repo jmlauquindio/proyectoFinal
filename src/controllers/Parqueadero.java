@@ -3,6 +3,7 @@ package controllers;
 import java.util.ArrayList;
 
 import models.Cliente;
+import java.util.List; 
 
 public class Parqueadero {
 
@@ -12,8 +13,8 @@ public class Parqueadero {
 			listasClientes = new ArrayList <> ();
 		}
 		
-		public Boolean ingresarCliente (String name, String id,  int phone, String mail) {
-			Cliente cliente = new Cliente (name, id, phone, mail);
+		public Boolean ingresarCliente (String name, String id,  int phone, String mail, int edad) {
+			Cliente cliente = new Cliente (name, id, phone, mail, edad);
 			this.listasClientes.add (cliente);
 			return true;
 		}
@@ -39,6 +40,19 @@ public class Parqueadero {
 				clientes = clientes + " <br> " + e.getName() + " " + e.getId();  
 				}
 			return clientes;
+		}
+
+		public String buscarClienteComoTexto(String id) {
+		    for (Cliente cliente : listasClientes) { 
+		        if (cliente.getId().equals(id)) {
+		            return "Nombre: " + cliente.getName() +
+		                   "\nID: " + cliente.getId() +
+		                   "\nTeléfono: " + cliente.getPhone() +
+		                   "\nCorreo: " + cliente.getMail() +
+		                   "\nEdad: " + cliente.getEdad();
+		        }
+		    }
+		    return null;
 		}
 }
 

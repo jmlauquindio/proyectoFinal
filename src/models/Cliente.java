@@ -8,13 +8,21 @@ public class Cliente {
     private int phone;
     private String mail;
     private ArrayList<Vehiculo> vehiculos;
+    private int edad;
 
-    public Cliente(String name, String id, int phone, String mail) {
-        super();
+    public Cliente(String name, String id, int phone, String mail, int edad) {
+        if (name == null || name.isBlank() ||
+            id == null || id.isBlank() ||
+            phone <= 0 ||
+            mail == null || mail.isBlank() ||
+            edad <= 0) {
+            throw new IllegalArgumentException("Datos de cliente inválidos");
+        }
         this.name = name;
         this.id = id;
         this.phone = phone;
         this.mail = mail;
+        this.edad = edad;
         this.vehiculos = new ArrayList<>();
     }
 
@@ -48,8 +56,16 @@ public class Cliente {
 
     public void setMail(String mail) {
         this.mail = mail;
+    } 
+
+    public int getEdad() {
+        return edad;
     }
 
+    public void setEdad(int edad) {
+        this.edad = edad;
+    }
+    
     public void addVehiculo(Vehiculo vehiculo) {
         vehiculos.add(vehiculo);
     }
@@ -66,4 +82,5 @@ public class Cliente {
     public String toString() {
         return "Cliente [name=" + name + ", id=" + id + ", phone=" + phone + ", mail=" + mail + "]";
     }
+    
 }
