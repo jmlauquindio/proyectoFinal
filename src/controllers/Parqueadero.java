@@ -24,8 +24,8 @@ public class Parqueadero {
 				}
 		}
 		
-		public Boolean eliminarCliente (ArrayList<String> listaClientes, String idCliente) {
-		        return listaClientes.remove(idCliente);
+		public Boolean eliminarCliente (String idCliente) {
+		        return this.listasClientes.remove(idCliente);
 		}
 		
 

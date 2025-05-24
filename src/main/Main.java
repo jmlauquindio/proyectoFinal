@@ -82,7 +82,7 @@ public class Main {
 
     public static void listaClientes(Parqueadero parqueadero) {
         SwingUtilities.invokeLater(() -> {
-            String html = "<html style='height:100px;overflow:scroll'>"
+            String html = "<html style='height:100px;overflow:scroll;width:100vh;'>"
                     + "<h2 style='width:500px;background:#CDCDCD;color:white;padding:0 30px;'>Listado de clientes:</h2>"
                     + "<p>" + parqueadero.getListaClientesComoTexto() + "</p>" 
                     + "<p><a href='accion:exportar'><span style='background-color:yellow;width: 200px;'>[Exportar a archivo]</span></a></p>"
