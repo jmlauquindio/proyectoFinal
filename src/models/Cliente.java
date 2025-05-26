@@ -5,24 +5,24 @@ import java.util.ArrayList;
 public class Cliente {
     private String name;
     private String id;
-    private int phone;
+    private String phone;
     private String mail;
     private ArrayList<Vehiculo> vehiculos;
-    private int edad;
+    private int age;
 
-    public Cliente(String name, String id, int phone, String mail, int edad) {
+    public Cliente(String name, String id, String phone, String mail, int age) {
         if (name == null || name.isBlank() ||
             id == null || id.isBlank() ||
-            phone <= 0 ||
+            phone == null ||
             mail == null || mail.isBlank() ||
-            edad <= 0) {
+            age <= 0) {
             throw new IllegalArgumentException("Datos de cliente inválidos");
         }
         this.name = name;
         this.id = id;
         this.phone = phone;
         this.mail = mail;
-        this.edad = edad;
+        this.age = age;
         this.vehiculos = new ArrayList<>();
     }
 
@@ -42,11 +42,11 @@ public class Cliente {
         this.id = id;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
@@ -58,12 +58,12 @@ public class Cliente {
         this.mail = mail;
     } 
 
-    public int getEdad() {
-        return edad;
+    public int getAge() {
+        return age;
     }
 
-    public void setEdad(int edad) {
-        this.edad = edad;
+    public void setAge(int age) {
+        this.age = age;
     }
     
     public void addVehiculo(Vehiculo vehiculo) {
@@ -80,7 +80,7 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return "Cliente [name=" + name + ", id=" + id + ", phone=" + phone + ", mail=" + mail + "]";
+        return "Cliente [name=" + name + ", id=" + id + ", phone=" + phone + ", mail=" + mail + ", age=" + age + "]";
     }
     
 }

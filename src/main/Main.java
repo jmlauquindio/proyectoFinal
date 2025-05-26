@@ -3,20 +3,21 @@ import javax.swing.*;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
 
+import controllers.ClienteController;
 import controllers.Parqueadero;
 
 public class Main {
 
     public static void main(String[] args) {
-        Parqueadero parqueadero = new Parqueadero();
+    	ClienteController clienteController = new ClienteController();
          
-        parqueadero.ingresarCliente("Juan Pérez", "12345", 300123456, "juanperez@mail.com", 25);
-        parqueadero.ingresarCliente("Ana Gómez", "67890", 300987654, "anagomez@mail.com", 17);
+    	clienteController.ingresarCliente("Juan Pérez", "12345", "3001234562", "juanperez@mail.com", 25);
+    	clienteController.ingresarCliente("Ana Gómez", "67890", "300987654", "anagomez@mail.com", 17);
 
-        mostrarMenu(parqueadero);
+        mostrarMenu(clienteController);
     }
 
-    public static void mostrarMenu(Parqueadero parqueadero) {
+    public static void mostrarMenu(ClienteController clienteController) {
         String[] opciones = {
             "Agregar cliente",
             "Listar clientes",
@@ -39,39 +40,39 @@ public class Main {
             );
 
             switch (opcion) {
-                case 0: agregarCliente(parqueadero); break;
-                case 1: listaClientes(parqueadero); break;
-                case 2: buscarCliente(parqueadero); break;
-                case 3: eliminarCliente(parqueadero); break;
-                case 4: exportarClientes(parqueadero); break;
+                case 0: agregarCliente(clienteController); break;
+                case 1: listaClientes(clienteController); break;
+                case 2: buscarCliente(clienteController); break;
+                case 3: eliminarCliente(clienteController); break;
+                case 4: exportarClientes(clienteController); break;
                 default: break;
             }
         } while (opcion != 5 && opcion != JOptionPane.CLOSED_OPTION);
     }
 
-    public static void agregarCliente(Parqueadero parqueadero) {
-        JTextField nombre = new JTextField();
+    public static void agregarCliente(ClienteController clienteController) {
+        JTextField name = new JTextField();
         JTextField id = new JTextField();
-        JTextField telefono = new JTextField();
-        JTextField correo = new JTextField();
-        JTextField edad = new JTextField();
+        JTextField phone = new JTextField();
+        JTextField mail = new JTextField();
+        JTextField age = new JTextField();
         
         Object[] campos = {
-            "Nombre:", nombre,
+            "Name:", name,
             "ID:", id,
-            "Teléfono:", telefono,
-            "Correo:", correo,
-            "Edad:", edad
+            "Phone:", phone,
+            "Mail:", mail,
+            "Age:", age,
         };
         int opcion = JOptionPane.showConfirmDialog(null, campos, "Agregar Cliente", JOptionPane.OK_CANCEL_OPTION);
         if (opcion == JOptionPane.OK_OPTION) {
             try {
-                parqueadero.ingresarCliente(
-                    nombre.getText(),
+            	clienteController.ingresarCliente(
+                    name.getText(),
                     id.getText(),
-                    Integer.parseInt(telefono.getText()),
-                    correo.getText(),
-                    Integer.parseInt(edad.getText())
+                    Integer.parseInt(phone.getText()),
+                    mail.getText(),
+                    Integer.parseInt(age.getText())
                 );
                 JOptionPane.showMessageDialog(null, "Cliente agregado correctamente.");
             } catch (Exception e) {
@@ -80,11 +81,11 @@ public class Main {
         }
     }
 
-    public static void listaClientes(Parqueadero parqueadero) {
+    public static void listaClientes(ClienteController clienteController) {
         SwingUtilities.invokeLater(() -> {
-            String html = "<html style='height:100px;overflow:scroll;width:100vh;'>"
+            String html = "<html style='height:100px;overflow:scroll'>"
                     + "<h2 style='width:500px;background:#CDCDCD;color:white;padding:0 30px;'>Listado de clientes:</h2>"
-                    + "<p>" + parqueadero.getListaClientesComoTexto() + "</p>" 
+                    + "<p>" + clienteController.getListaClientesComoTexto() + "</p>" 
                     + "<p><a href='accion:exportar'><span style='background-color:yellow;width: 200px;'>[Exportar a archivo]</span></a></p>"
                     + "</html>";
 
@@ -100,7 +101,7 @@ public class Main {
                 public void hyperlinkUpdate(HyperlinkEvent e) {
                     if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
                         if ("accion:exportar".equals(e.getDescription())) {
-                            exportarClientes(parqueadero);
+                            exportarClientes(clienteController);
                         }
                     }
                 }
@@ -110,22 +111,28 @@ public class Main {
         });
     }
 
-    public static void buscarCliente(Parqueadero parqueadero) {
+    public static void buscarCliente(ClienteController clienteController) {
         String id = JOptionPane.showInputDialog("Ingrese el ID del cliente a buscar:");
         if (id != null && !id.isBlank()) {
-            String info = parqueadero.buscarClienteComoTexto(id);
+            String name = JOptionPane.showInputDialog("Ingrese el nombre del cliente a buscar:");
+            if (name != null && !name.isBlank()) {
+           String phone = JOptionPane.showInputDialog("Ingrese el número de telefono del cliente a buscar:");
+           if (phone != null && !phone.isBlank()) { 	
+			String info = clienteController.buscarClienteComoTexto(id, name, phone);
             if (info != null && !info.isBlank()) {
                 JOptionPane.showMessageDialog(null, info, "Cliente encontrado", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(null, "Cliente no encontrado.");
             }
         }
+    	}
+        }
     }
 
-    public static void eliminarCliente(Parqueadero parqueadero) {
+    public static void eliminarCliente(ClienteController clienteController) {
         String id = JOptionPane.showInputDialog("Ingrese el ID del cliente a eliminar:");
         if (id != null && !id.isBlank()) {
-            boolean eliminado = parqueadero.eliminarCliente(id);
+            boolean eliminado = clienteController.eliminarCliente(id);
             if (eliminado) {
                 JOptionPane.showMessageDialog(null, "Cliente eliminado correctamente.");
             } else {
@@ -134,7 +141,7 @@ public class Main {
         }
     }
 
-    public static void exportarClientes(Parqueadero parqueadero) {
+    public static void exportarClientes(ClienteController clienteController) {
         System.out.println("Exportando clientes...");
         JOptionPane.showMessageDialog(null, "Clientes exportados correctamente.");
     }
