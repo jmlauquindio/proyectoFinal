@@ -10,39 +10,33 @@ public class VehiculoController {
 		listasVehiculos = new ArrayList <> ();
 		}
 	
-	public Boolean registrarVehiculo (String placa, TipoVehiculo tipoVehiculo, String color, String modelo, models.Membresia membresia) {
-		Vehiculo vehiculo = new Vehiculo (placa, tipoVehiculo, color, modelo, membresia);
+	public Boolean registrarVehiculo (String placa,  String color, String modelo, Object membresia) {
+		Vehiculo vehiculo = new Vehiculo (placa, color, modelo, membresia);
 		this.listasVehiculos.add (vehiculo);
 		return true;
 	}
 	public void getlistaVehiculo () {
 		for (Vehiculo e: listasVehiculos) {
-			System.out.println (e.getPlaca () + " " + e.getTipoVehiculo() + " " + e.getColor() +" " + e.getModelo());
+			System.out.println (e.getPlaca () + " " + e.getColor() +" " + e.getModelo());
 			}
 		}
 	
 	
 
-	public String buscarVehiculoComoTexto(Cliente clientes, String placa, TipoVehiculo tipoVehiculo, String Cliente) {
+	public String buscarVehiculoComoTexto(Cliente clientes, String placa, String Cliente) {
 	    for (Vehiculo vehiculo : listasVehiculos) { 
-	        if (vehiculo.getPlaca().equals(placa)) {
-	        	if (vehiculo.getTipoVehiculo().equals(tipoVehiculo)) {
-	        		if (vehiculo.getClientes().equals(clientes)) {
-	        			return "Placa: " + vehiculo.getPlaca() +
-	                   "\nTipoVehiculo: " + vehiculo.getTipoVehiculo() +
-	                   "\nCliente: " + vehiculo.getClientes();
-	        		}
-	        	}
+	        if (vehiculo.getPlaca().equals(placa)) {  
+	        			return "Placa: " + vehiculo.getPlaca() + 
+	                   "\nCliente: " + vehiculo.getClientes(); 
 	        }
 	      }
 	    return "Vehículo no encontrado.";
 	 }
 	
-	 public Boolean actualizarVehiculo (Cliente clientes, String newPlaca, TipoVehiculo newTipoVehiculo, String newColor, String newModelo) {
+	 public Boolean actualizarVehiculo (Cliente clientes, String newPlaca, String newColor, String newModelo) {
 			for (Vehiculo vehiculo: listasVehiculos) {
 				if (vehiculo.getClientes().equals(clientes)) {
-					vehiculo.setPlaca(newPlaca);
-					vehiculo.setTipoVehiculo(newTipoVehiculo);
+					vehiculo.setPlaca(newPlaca); 
 					vehiculo.setColor(newColor);
 					vehiculo.setModelo(newModelo);
 					return true;

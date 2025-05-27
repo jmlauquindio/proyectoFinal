@@ -1,6 +1,7 @@
 package models;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Cliente {
     private String name;
@@ -86,5 +87,36 @@ public class Cliente {
     public String toString() {
         return "Cliente [name=" + name + ", id=" + id + ", phone=" + phone + ", mail=" + mail + ", age=" + age + "]";
     }
+	
+	//Agrega vehiculo del cliente
+    public boolean agregarVehiculo(Vehiculo vehiculo) { 
+        for (Vehiculo v : vehiculos) {
+        	//Devuelve en false si ya aexiste un vehiculo con esa placa
+            if (v.getPlaca().equalsIgnoreCase(vehiculo.getPlaca())) {
+                return false; 
+            }
+        }
+        vehiculos.add(vehiculo);
+        return true;
+    } 
+	public String vehiculosComoTexto() {
+	    if (vehiculos.isEmpty()) {
+	        return "Este cliente no tiene vehículos registrados.";
+	    }
+	    StringBuilder sb = new StringBuilder();
+	    for (Vehiculo v : vehiculos) {
+	        sb.append(v.toString()).append("\n");
+	    }
+	    return sb.toString();
+	}
+
+	public Vehiculo getVehiculoPorPlaca(String placa) {
+	    for (Vehiculo v : vehiculos) { 
+	        if (v.getPlaca().equalsIgnoreCase(placa)) {
+	            return v;
+	        }
+	    }
+	    return null;
+	}
     
 }

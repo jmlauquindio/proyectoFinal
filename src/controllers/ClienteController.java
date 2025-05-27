@@ -48,23 +48,25 @@ public class ClienteController {
         return clientes;
     }
 
-    public String buscarClienteComoTexto(String id, String name, String phone) {
+    public String buscarClienteComoTexto(String id) {
         for (Cliente cliente : listasClientes) {
-            if (cliente.getId().equals(id)) {
-                if (cliente.getName().equals(name)) {
-                    if (cliente.getPhone().equals(phone)) {
-                        return "Name: " + cliente.getName() +
-                                "\nID: " + cliente.getId() +
-                                "\nPhone: " + cliente.getPhone() +
-                                "\nMail: " + cliente.getMail() +
-                                "\nAge: " + cliente.getAge();
-                    }
-                }
-            }
+            if (cliente.getId().equals(id)) { 
+                return "Name: " + cliente.getName() +
+                        "\nID: " + cliente.getId() +
+                        "\nPhone: " + cliente.getPhone() +
+                        "\nMail: " + cliente.getMail() +
+                        "\nAge: " + cliente.getAge();
+            } 
         }
         return null;
     }
-
+    public String buscarClientePorIdComoTexto(String id) {
+        Cliente cliente = getClientePorId(id); // Asumiendo que tienes este método
+        if (cliente != null) {
+            return cliente.toString(); // O el formato que prefieras
+        }
+        return null;
+    }
     public Boolean actualizarCliente(String name, String newId, String newPhone, String newMail, int newAge) {
         for (Cliente cliente : listasClientes) {
             if (cliente.getName().equals(name)) {
@@ -92,8 +94,44 @@ public class ClienteController {
     public int contarClientes() {
         return listasClientes.size();
     }
+    
+    //Agregar vehiculo
+    public boolean agregarVehiculoACliente(String idCliente, String placa, String color, String modelo) {
+        Cliente cliente = getClientePorId(idCliente); 
+        if (cliente != null) {
+            Vehiculo vehiculo = new Vehiculo(placa, color, modelo, null);  
+            return cliente.agregarVehiculo(vehiculo); 
+        }
+        return false; 
+    }
+    
+    //Obtener información de vehiculos de un cliente, en String
+    public String getVehiculosClienteComoTexto(String idCliente) {
+        Cliente cliente = getClientePorId(idCliente);  
+        if (cliente != null) {
+            return cliente.vehiculosComoTexto();  
+        }
+        return null;
+    }
+    public Cliente buscarClientePorVehiculo(String placa) {
+        for (Cliente cliente : listasClientes) { 
+            if (cliente.getVehiculoPorPlaca(placa) != null) {
+                return cliente;
+            }
+        }
+        return null;
+    }
 
-    public void vehiculosCliente() {
-        // Por implementar: asociación de vehículos con cliente
+    public boolean actualizarVehiculoDeCliente(String idCliente, String placa, String color, String modelo) {
+        Cliente cliente = getClientePorId(idCliente);
+        if (cliente != null) {
+            Vehiculo vehiculo = cliente.getVehiculoPorPlaca(placa);
+            if (vehiculo != null) {
+                vehiculo.setColor(color);
+                vehiculo.setModelo(modelo);
+                return true;
+            }
+        }
+        return false;
     }
 }
