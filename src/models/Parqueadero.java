@@ -2,7 +2,7 @@ package models;
 import java.util.ArrayList;
 import java.util.LinkedList; 
 
-public class Parqueadero {
+public abstract class Parqueadero implements IParqueaderos {
     private String name;
     private String direccion;
     private String representante;

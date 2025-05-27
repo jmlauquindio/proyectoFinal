@@ -10,8 +10,8 @@ public class VehiculoController {
 		listasVehiculos = new ArrayList <> ();
 		}
 	
-	public Boolean registrarVehiculo (String placa, TipoVehiculo tipoVehiculo, String color, String modelo) {
-		Vehiculo vehiculo = new Vehiculo (placa, tipoVehiculo, color, modelo);
+	public Boolean registrarVehiculo (String placa, TipoVehiculo tipoVehiculo, String color, String modelo, models.Membresia membresia) {
+		Vehiculo vehiculo = new Vehiculo (placa, tipoVehiculo, color, modelo, membresia);
 		this.listasVehiculos.add (vehiculo);
 		return true;
 	}
