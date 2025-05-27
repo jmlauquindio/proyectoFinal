@@ -1,6 +1,7 @@
 package models;
 import java.util.ArrayList;
-import java.util.LinkedList; 
+import java.util.LinkedList;
+import java.util.List; 
 
 public abstract class Parqueadero implements IParqueaderos {
     private String name;
@@ -12,6 +13,10 @@ public abstract class Parqueadero implements IParqueaderos {
     private int espaciosAutomoviles;
     private int espaciosCamiones;
     private ArrayList<Cliente> clientes;
+    private double tarifaMoto;
+    private double tarifaAutomovil;
+    private double tarifaCamion;
+    private List<Pagos> pagos = new ArrayList<>();
 
     public Parqueadero(String name, String direccion, String representante,String telefonos, String mediosContactos, int espaciosMotos, int espaciosAutomoviles, int espaciosCamiones) {
         this.name = name;
@@ -105,6 +110,42 @@ public abstract class Parqueadero implements IParqueaderos {
 		this.mediosContactos = mediosContactos;
 	}
 
+	public double getTarifaMoto() {
+	    return tarifaMoto;
+	}
+
+	public double getTarifaAutomovil() {
+	    return tarifaAutomovil;
+	}
+
+	public double getTarifaCamion() {
+	    return tarifaCamion;
+	}
+
+	public void setTarifaMoto(double tarifaMoto) {
+	    this.tarifaMoto = tarifaMoto;
+	}
+
+	public void setTarifaAutomovil(double tarifaAutomovil) {
+	    this.tarifaAutomovil = tarifaAutomovil;
+	}
+
+	public void setTarifaCamion(double tarifaCamion) {
+	    this.tarifaCamion = tarifaCamion;
+	}
+
+    public List<Pagos> getPagos() {
+        return pagos;
+    }
+
+    public void addPago(Pagos pago) {
+        pagos.add(pago);
+    }
+
+    public void setPagos(List<Pagos> pagos) {
+        this.pagos = pagos;
+    }
+	
 	@Override
     public String toString() {
         return "Parqueadero [name=" + name + ", direccion=" + direccion + ", representante=" + representante
@@ -122,5 +163,7 @@ public abstract class Parqueadero implements IParqueaderos {
         }
 
         return clientesMenores;
-    }
+    } 
+    
+
 }

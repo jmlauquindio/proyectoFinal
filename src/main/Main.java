@@ -1,7 +1,7 @@
 package main;
 
 import javax.swing.*;
-import controllers.ClienteController;
+import controllers.*;
 import models.Cliente;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -32,8 +32,7 @@ public class Main {
                     + "<p style='color:#D6DBDF;margin:5px 0 0 0;'><b>Dirección:</b> " + direccionParqueadero + "</p>"
                     + "<p style='color:#D6DBDF;margin:0;'><b>Teléfono:</b> " + telefonoParqueadero + "</p>"
                     + "<p style='color:#D6DBDF;margin:0;'><b>Representante:</b> " + representanteParqueadero + "</p>"
-                    + "</div>"
-                    + "<h2 style='width:500px;background:#CDCDCD;color:#2E4053;padding:0 30px;border-radius:8px;'>Menú principal </h2>"
+                    + "</div>" 
                     + "</html>";
 
             JEditorPane editorPane = new JEditorPane("text/html", html);
@@ -43,37 +42,70 @@ public class Main {
             JScrollPane scrollPane = new JScrollPane(editorPane);
             scrollPane.setPreferredSize(new java.awt.Dimension(500, 400));
             String[] opciones = {
-                    "Agregar cliente",
-                    "Listar clientes",
-                    "Buscar cliente",
-                    "Eliminar cliente",
-                    "Ver vehículos del cliente",
-                    "Buscar vehículo",
-                    "Configuración",
-                    "Exportar clientes",
-                    "Salir"
-            };
+            	    "Gestión de Clientes",
+            	    "Gestión de Vehículos",
+            	    "Administración Parqueadero",
+            	    "Salir"
+            	};
 
-            int opcion = JOptionPane.showOptionDialog(null, editorPane, "Menú Principal", JOptionPane.PLAIN_MESSAGE,
-                    JOptionPane.PLAIN_MESSAGE,
-                    null,
-                    opciones,
-                    opciones[0]);
+            	int opcion = JOptionPane.showOptionDialog(null, editorPane, "Menú Principal", JOptionPane.PLAIN_MESSAGE,
+            	        JOptionPane.PLAIN_MESSAGE,
+            	        null,
+            	        opciones,
+            	        opciones[0]);
 
-            switch (opcion) {
-                case 0: agregarCliente(cliente); break;
-                case 1: listaClientes(cliente); break;
-                case 2: buscarCliente(cliente); break;
-                case 3: eliminarCliente(cliente); break;
-                case 4: verVehiculosCliente(cliente); break;
-                case 5: buscarVehiculo(cliente); break;
-                case 6: configuracion(); continue;
-                case 7: exportarClientes(cliente); break;
-                case 8: 
-                case JOptionPane.CLOSED_OPTION:
-                    return; 
-                default: break;
-            }
+            	switch (opcion) {
+            	    case 0: 
+            	        String[] opcionesClientes = {
+            	            "Agregar cliente",
+            	            "Listar clientes",
+            	            "Buscar cliente",
+            	            "Eliminar cliente",
+            	            "Ver vehículos del cliente",
+            	            "Volver"
+            	        };
+            	        String seleccionCliente = (String) JOptionPane.showInputDialog(
+            	            null, "Seleccione una opción:", "Clientes",
+            	            JOptionPane.PLAIN_MESSAGE, null, opcionesClientes, opcionesClientes[0]); 
+            	        break;
+            	    case 1:  
+            	        String[] opcionesVehiculos = {
+            	            "Buscar vehículo",
+            	            "Actualizar vehículo",
+            	            "Volver"
+            	        };
+            	        String seleccionVehiculo = (String) JOptionPane.showInputDialog(
+            	            null, "Seleccione una opción:", "Vehículos",
+            	            JOptionPane.PLAIN_MESSAGE, null, opcionesVehiculos, opcionesVehiculos[0]); 
+            	        break;
+            	    case 2:  
+            	        String[] opcionesAdmin = {
+            	            "Configurar tarifas",
+            	            "Pago por período",
+            	            "Historial de pagos",
+            	            "Puestos disponibles",
+            	            "Configuración",
+            	            "Volver"
+            	        };
+            	        String seleccionAdmin = (String) JOptionPane.showInputDialog(
+            	            null, "Seleccione una opción:", "Administración Parqueadero",
+            	            JOptionPane.PLAIN_MESSAGE, null, opcionesAdmin, opcionesAdmin[0]);
+            	        if ("Configurar tarifas".equals(seleccionAdmin)) {
+            	            ParqueaderoController.configurarTarifas();
+            	        } else if ("Pago por período".equals(seleccionAdmin)) {
+            	            ParqueaderoController.pagoPeriodo();
+            	        } else if ("Historial de pagos".equals(seleccionAdmin)) {
+            	            ParqueaderoController.historialPagos();
+            	        } else if ("Puestos disponibles".equals(seleccionAdmin)) { 
+            	        } else if ("Configuración".equals(seleccionAdmin)) {
+            	            configuracion();
+            	        }
+            	        break;
+            	    case 3:
+            	    case JOptionPane.CLOSED_OPTION:
+            	        return;
+            	    default: break;
+            	}
         }
     }
 
