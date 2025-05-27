@@ -1,7 +1,5 @@
 package services;
-
-import models.Cliente;
-import models.Vehiculo;
+import models.*;
 import java.util.ArrayList;
 
 public class ParqueaderoService {

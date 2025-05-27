@@ -1,9 +1,6 @@
 package controllers;
-
 import java.util.ArrayList;
-
 import models.*;
-
 
 public class VehiculoController {
 
@@ -25,24 +22,24 @@ public class VehiculoController {
 		}
 	
 	
-	 public String buscarVehiculoComoTexto(String placa, tipoVehiculo tipoVehiculo, String Cliente) {
+	 public String buscarVehiculoComoTexto(String placa, TipoVehiculo tipoVehiculo, String Cliente) {
 	    for (Vehiculo vehiculo : listasVehiculos) { 
-	        if (Vehiculo.getPlaca().equals(placa)) {
-	        	if (Vehiculo.getTipoVehiculo().equals(tipoVehiculo)) {
-	        		if (Vehiculo.cliente()equals(cliente)) {
-	        			return "Placa: " + Vehiculo.getPlaca() +
-	                   "\nTipoVehiculo: " + Vehiculo.getTipoVehiculo() +
-	                   "\nCliente: " + Vehiculo.cliente();
+	        if (vehiculo.getPlaca().equals(placa)) {
+	        	if (vehiculo.getTipoVehiculo().equals(tipoVehiculo)) {
+	        		if (vehiculo.getCliente()equals(Cliente)) {
+	        			return "Placa: " + vehiculo.getPlaca() +
+	                   "\nTipoVehiculo: " + vehiculo.getTipoVehiculo() +
+	                   "\nCliente: " + vehiculo.getName();
 	        		}
 	        	}
 	        }
 	      }
-	    return null;
-	}
-	 
+	    return "Vehículo no encontrado.";
+	 }
+	
 	 public Boolean actualizarVehiculo (String placa, tipoVehiculo newTipoVehiculo, String newColor, String newModelo) {
-			for (Vehiculo c: listasVehiculos) {
-				if (c.getPlaca().equals(placa)) {
+			for (Vehiculo vehiculo: listasVehiculos) {
+				if (vehiculo.getPlaca().equals(placa)) {
 					Vehiculo.setTipoVehiculo(newTipoVehiculo);
 					Vehiculo.setColor(newColor);
 					Vehiculo.setModelo(newModelo);

@@ -1,8 +1,6 @@
 package controllers;
-
 import java.util.ArrayList;
-
-import models.Cliente;
+import models.*;
 
 public class ClienteController {
 
@@ -59,12 +57,12 @@ public class ClienteController {
 			    return null;
 			}
 			public Boolean actualizarCliente(String name, String newId, String newPhone, String newMail, int newAge) {
-				for (Cliente c: listasClientes) {
-					if (c.getName().equals(name)) {
-						c.setId(newId);
-						c.setPhone(newPhone);
-						c.setMail(newMail);
-						c.setAge(newAge);
+				for (Cliente cliente: listasClientes) {
+					if (cliente.getName().equals(name)) {
+						cliente.setId(newId);
+						cliente.setPhone(newPhone);
+						cliente.setMail(newMail);
+						cliente.setAge(newAge);
 						return true;
 					}
 				}

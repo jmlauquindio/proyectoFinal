@@ -1,10 +1,6 @@
 package main;
 import javax.swing.*;
-import javax.swing.event.HyperlinkEvent;
-import javax.swing.event.HyperlinkListener;
-
-import controllers.ClienteController;
-import controllers.Parqueadero;
+import controllers.*;
 
 public class Main {
 
@@ -124,7 +120,9 @@ public class Main {
             } else {
                 JOptionPane.showMessageDialog(null, "Cliente no encontrado.");
             }
+          }
         }
+      }
     }
 
     public static void eliminarCliente(ClienteController clienteController) {

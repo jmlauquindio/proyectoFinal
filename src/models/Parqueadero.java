@@ -1,5 +1,4 @@
 package models;
-
 import java.util.ArrayList;
 import java.util.LinkedList; 
 
@@ -93,7 +92,7 @@ public class Parqueadero {
         LinkedList<Cliente> clientesMenores = new LinkedList<>();
 
         for (Cliente cliente : clientes) {
-            if (cliente.getEdad() < 18) {
+            if (cliente.getAge() < 18) {
                 clientesMenores.add(cliente);
             }
         }
