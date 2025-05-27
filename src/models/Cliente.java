@@ -7,8 +7,8 @@ public class Cliente {
     private String id;
     private String phone;
     private String mail;
-    private ArrayList<Vehiculo> vehiculos;
     private int age;
+    private ArrayList<Vehiculo> vehiculos;
 
     public Cliente(String name, String id, String phone, String mail, int age) {
         if (name == null || name.isBlank() ||
@@ -77,8 +77,12 @@ public class Cliente {
     public ArrayList<Vehiculo> getVehiculos() {
         return vehiculos;
     }
+    
+    public void setVehiculos(ArrayList<Vehiculo> vehiculos) {
+		this.vehiculos = vehiculos;
+	}
 
-    @Override
+	@Override
     public String toString() {
         return "Cliente [name=" + name + ", id=" + id + ", phone=" + phone + ", mail=" + mail + ", age=" + age + "]";
     }

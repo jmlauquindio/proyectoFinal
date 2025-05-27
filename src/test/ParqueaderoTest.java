@@ -10,8 +10,8 @@ public class ParqueaderoTest {
     //assertEquals
     @Test
     void testNombreParqueadero() {
-        Parqueadero parqueadero = new Parqueadero("Central", "Calle 1", "Jhonatan", 10, 10, 5);
-        assertEquals("Central", parqueadero.getNombre());
+        Parqueadero parqueadero = new Parqueadero("Central", "Calle 1", "Jhonatan", "3053159653", "WhatsApp:3053159653, correo: parquedeor.central@gmail.com", 10, 10, 5);
+        assertEquals("Central", parqueadero.getName());
     }
     
 }

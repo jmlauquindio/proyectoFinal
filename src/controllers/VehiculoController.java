@@ -10,7 +10,7 @@ public class VehiculoController {
 		listasVehiculos = new ArrayList <> ();
 		}
 	
-	public Boolean registrarVehiculo (String placa, tipoVehiculo tipoVehiculo, String color, String modelo) {
+	public Boolean registrarVehiculo (String placa, TipoVehiculo tipoVehiculo, String color, String modelo) {
 		Vehiculo vehiculo = new Vehiculo (placa, tipoVehiculo, color, modelo);
 		this.listasVehiculos.add (vehiculo);
 		return true;
@@ -22,14 +22,15 @@ public class VehiculoController {
 		}
 	
 	
-	 public String buscarVehiculoComoTexto(String placa, TipoVehiculo tipoVehiculo, String Cliente) {
+
+	public String buscarVehiculoComoTexto(Cliente clientes, String placa, TipoVehiculo tipoVehiculo, String Cliente) {
 	    for (Vehiculo vehiculo : listasVehiculos) { 
 	        if (vehiculo.getPlaca().equals(placa)) {
 	        	if (vehiculo.getTipoVehiculo().equals(tipoVehiculo)) {
-	        		if (vehiculo.getCliente()equals(Cliente)) {
+	        		if (vehiculo.getClientes().equals(clientes)) {
 	        			return "Placa: " + vehiculo.getPlaca() +
 	                   "\nTipoVehiculo: " + vehiculo.getTipoVehiculo() +
-	                   "\nCliente: " + vehiculo.getName();
+	                   "\nCliente: " + vehiculo.getClientes();
 	        		}
 	        	}
 	        }
@@ -37,12 +38,13 @@ public class VehiculoController {
 	    return "Vehículo no encontrado.";
 	 }
 	
-	 public Boolean actualizarVehiculo (String placa, tipoVehiculo newTipoVehiculo, String newColor, String newModelo) {
+	 public Boolean actualizarVehiculo (Cliente clientes, String newPlaca, TipoVehiculo newTipoVehiculo, String newColor, String newModelo) {
 			for (Vehiculo vehiculo: listasVehiculos) {
-				if (vehiculo.getPlaca().equals(placa)) {
-					Vehiculo.setTipoVehiculo(newTipoVehiculo);
-					Vehiculo.setColor(newColor);
-					Vehiculo.setModelo(newModelo);
+				if (vehiculo.getClientes().equals(clientes)) {
+					vehiculo.setPlaca(newPlaca);
+					vehiculo.setTipoVehiculo(newTipoVehiculo);
+					vehiculo.setColor(newColor);
+					vehiculo.setModelo(newModelo);
 					return true;
 				}
 			}

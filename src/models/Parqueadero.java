@@ -3,18 +3,22 @@ import java.util.ArrayList;
 import java.util.LinkedList; 
 
 public class Parqueadero {
-    private String nombre;
+    private String name;
     private String direccion;
     private String representante;
+    private String telefonos;
+    private String mediosContactos;
     private int espaciosMotos;
     private int espaciosAutomoviles;
     private int espaciosCamiones;
     private ArrayList<Cliente> clientes;
 
-    public Parqueadero(String nombre, String direccion, String representante, int espaciosMotos, int espaciosAutomoviles, int espaciosCamiones) {
-        this.nombre = nombre;
+    public Parqueadero(String name, String direccion, String representante,String telefonos, String mediosContactos, int espaciosMotos, int espaciosAutomoviles, int espaciosCamiones) {
+        this.name = name;
         this.direccion = direccion;
         this.representante = representante;
+        this.telefonos = telefonos;
+        this.mediosContactos = mediosContactos;
         this.espaciosMotos = espaciosMotos;
         this.espaciosAutomoviles = espaciosAutomoviles;
         this.espaciosCamiones = espaciosCamiones;
@@ -32,7 +36,11 @@ public class Parqueadero {
     public ArrayList<Cliente> getClientes() {
         return clientes;
     } 
-
+    
+    public void setClientes(ArrayList<Cliente> clientes) {
+		this.clientes = clientes;
+	}
+    
     public int getEspaciosMotos() {
         return espaciosMotos;
     }
@@ -57,12 +65,12 @@ public class Parqueadero {
         this.espaciosCamiones = espaciosCamiones;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getName() {
+        return name;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDireccion() {
@@ -80,11 +88,27 @@ public class Parqueadero {
     public void setRepresentante(String representante) {
         this.representante = representante;
     }   
+    
+    public String getTelefonos() {
+		return telefonos;
+	}
 
-    @Override
+	public void setTelefonos(String telefonos) {
+		this.telefonos = telefonos;
+	}
+
+	public String getMediosContactos() {
+		return mediosContactos;
+	}
+
+	public void setMediosContactos(String mediosContactos) {
+		this.mediosContactos = mediosContactos;
+	}
+
+	@Override
     public String toString() {
-        return "Parqueadero [nombre=" + nombre + ", direccion=" + direccion + ", representante=" + representante
-                + ", espaciosMotos=" + espaciosMotos + ", espaciosAutomoviles=" + espaciosAutomoviles
+        return "Parqueadero [name=" + name + ", direccion=" + direccion + ", representante=" + representante
+                + ",telefonos" + telefonos + ", mediosContactos" + mediosContactos + ", espaciosMotos=" + espaciosMotos + ", espaciosAutomoviles=" + espaciosAutomoviles
                 + ", espaciosCamiones=" + espaciosCamiones + "]";
     }
 

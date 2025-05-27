@@ -1,16 +1,20 @@
 package models;
 
+import java.util.ArrayList;
+
 public class Vehiculo {
     private String placa;
-    private tipoVehiculo TipoVehiculo; 
+    private TipoVehiculo TipoVehiculo; 
     private String color;
     private String modelo;
+    private ArrayList<Cliente> clientes;
 
-    public Vehiculo(String placa, tipoVehiculo tipoVehiculo, String color, String modelo) {
+    public Vehiculo(String placa, TipoVehiculo tipoVehiculo, String color, String modelo) {
         this.placa = placa;
         this.TipoVehiculo = tipoVehiculo;
         this.color = color;
         this.modelo = modelo;
+        this.clientes = new ArrayList<>();
     } 
     public String getPlaca() {
         return placa;
@@ -20,11 +24,11 @@ public class Vehiculo {
         this.placa = placa;
     }
 
-    public tipoVehiculo getTipoVehiculo() {
+    public TipoVehiculo getTipoVehiculo() {
         return TipoVehiculo;
     }
 
-    public void setTipoVehiculo(tipoVehiculo TipoVehiculo) {
+    public void setTipoVehiculo(TipoVehiculo TipoVehiculo) {
         this.TipoVehiculo = TipoVehiculo;
     }
 
@@ -44,8 +48,15 @@ public class Vehiculo {
         this.modelo = modelo;
     }
 
-    @Override
+    public ArrayList<Cliente> getClientes() {
+		return clientes;
+	}
+	public void setClientes(ArrayList<Cliente> clientes) {
+		this.clientes = clientes;
+	}
+	@Override
     public String toString() {
         return "Vehiculo [placa=" + placa + ", tipoVehiculo=" + TipoVehiculo + ", color=" + color + ", modelo=" + modelo + "]";
     }
+	
 }

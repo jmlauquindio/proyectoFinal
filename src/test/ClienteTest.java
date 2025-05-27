@@ -18,11 +18,11 @@ public class ClienteTest {
     void testObtenerClientesMenoresDeEdad() {
         System.out.println("Inicia test obtenerListadoMenoresEdad");
 
-        Parqueadero parqueadero = new Parqueadero("Central", "Calle 1", "Jhonatan", 10, 10, 5);
+        Parqueadero parqueadero = new Parqueadero("Central", "Calle 1", "Jhonatan", "3053159653", "WhatsApp:3053159653, correo: parquedeor.central@gmail.com",10, 10, 5);
         Cliente luis = new Cliente("Luis", "1", "123", "luis@mail.com", 20);
         Cliente juan = new Cliente("Juan", "2", "456", "juan@mail.com", 17);
         Cliente camilo = new Cliente("Camilo", "3", "789", "camilo@mail.com", 15);
-
+        
         parqueadero.registrarCliente(luis);
         parqueadero.registrarCliente(juan);
         parqueadero.registrarCliente(camilo);
@@ -52,7 +52,7 @@ public class ClienteTest {
         Cliente c2 = new Cliente("Isabela", "2", "456", "i@bmail.com", 18);
         Cliente c3 = new Cliente("Jorge Mario", "3", "789", "j@mail.com", 28);
 
-        Parqueadero parqueadero = new Parqueadero("Central", "Calle 1", "Jhonatan", 10, 10, 5);
+        Parqueadero parqueadero = new Parqueadero("Central", "Calle 1", "Jhonatan","3053159653", "WhatsApp:3053159653, correo: parquedeor.central@gmail.com", 10, 10, 5);
         parqueadero.registrarCliente(c1);
         parqueadero.registrarCliente(c2);
         parqueadero.registrarCliente(c3);
@@ -66,7 +66,7 @@ public class ClienteTest {
     @Test
     void testCantidadClientes() {
         System.out.println("Inicia test CantidadClientes");
-        Parqueadero parqueadero = new Parqueadero("Central", "Calle 1", "Jhonatan", 10, 10, 5);
+        Parqueadero parqueadero = new Parqueadero("Central", "Calle 1", "Jhonatan", "3053159653", "WhatsApp:3053159653, correo: parquedeor.central@gmail.com", 10, 10, 5);
         parqueadero.registrarCliente(new Cliente("Ana", "1", "123", "a@mail.com", 18));
         parqueadero.registrarCliente(new Cliente("Isabela", "2", "456", "i@bmail.com", 18));
         // assertTrue
