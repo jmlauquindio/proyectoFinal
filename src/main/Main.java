@@ -9,45 +9,56 @@ import controllers.Parqueadero;
 public class Main {
 
     public static void main(String[] args) {
-    	ClienteController clienteController = new ClienteController();
+    	ClienteController cliente = new ClienteController();
          
-    	clienteController.ingresarCliente("Juan Pérez", "12345", "3001234562", "juanperez@mail.com", 25);
-    	clienteController.ingresarCliente("Ana Gómez", "67890", "300987654", "anagomez@mail.com", 17);
+    	cliente.ingresarCliente("Juan Pérez", "12345", "3123142412", "juanperez@mail.com", 25);
+    	cliente.ingresarCliente("Ana Gómez", "67890", "231232142", "anagomez@mail.com", 17);
 
-        mostrarMenu(clienteController);
+        mostrarMenu(cliente);
     }
 
-    public static void mostrarMenu(ClienteController clienteController) {
-        String[] opciones = {
-            "Agregar cliente",
-            "Listar clientes",
-            "Buscar cliente",
-            "Eliminar cliente",
-            "Exportar clientes",
-            "Salir"
-        };
-        int opcion;
-        do {
-            opcion = JOptionPane.showOptionDialog(
-                null,
-                "Seleccione una opción",
-                "Menú Principal",
-                JOptionPane.DEFAULT_OPTION,
-                JOptionPane.INFORMATION_MESSAGE,
-                null,
-                opciones,
-                opciones[0]
-            );
+    public static void mostrarMenu(ClienteController cliente) {
+        	 SwingUtilities.invokeLater(() -> {
+                String html = "<html style='height:100px;overflow:scroll;width:100vh;'>"
+                        + "<h2 style='width:500px;background:#CDCDCD;color:white;padding:0 30px;'>Menú principal<br><small>Clientes:</h2>" 
+                        + "<p>" + cliente.getListaClientesComoTexto() + "</p>"  
+                        + "</html>";
 
-            switch (opcion) {
-                case 0: agregarCliente(clienteController); break;
-                case 1: listaClientes(clienteController); break;
-                case 2: buscarCliente(clienteController); break;
-                case 3: eliminarCliente(clienteController); break;
-                case 4: exportarClientes(clienteController); break;
-                default: break;
-            }
-        } while (opcion != 5 && opcion != JOptionPane.CLOSED_OPTION);
+                JEditorPane editorPane = new JEditorPane("text/html", html);
+                editorPane.setEditable(false);
+                editorPane.setOpaque(false);
+
+                JScrollPane scrollPane = new JScrollPane(editorPane);
+                scrollPane.setPreferredSize(new java.awt.Dimension(500, 400));
+                String[] opciones = {
+                        "Agregar cliente",
+                        "Listar clientes",
+                        "Buscar cliente",
+                        "Eliminar cliente",
+                        "Exportar clientes",
+                        "Salir"
+                    };
+                    
+                    int opcion;
+                    
+                    do {
+                    	
+                        opcion = JOptionPane.showOptionDialog(null, editorPane, "Menú Principal", JOptionPane.PLAIN_MESSAGE,
+                                JOptionPane.PLAIN_MESSAGE,
+                                null,
+                                opciones,
+                                opciones[0]);
+            	            
+                        switch (opcion) {
+                            case 0: agregarCliente(cliente); break;
+                            case 1: listaClientes(cliente); break;
+                            case 2: buscarCliente(cliente); break;
+                            case 3: eliminarCliente(cliente); break;
+                            case 4: exportarClientes(cliente); break;
+                            default: break;
+                        }
+                    } while (opcion != 5 && opcion != JOptionPane.CLOSED_OPTION);
+	        }); 
     }
 
     public static void agregarCliente(ClienteController clienteController) {
@@ -70,7 +81,7 @@ public class Main {
             	clienteController.ingresarCliente(
                     name.getText(),
                     id.getText(),
-                    Integer.parseInt(phone.getText()),
+                    phone.getText(),
                     mail.getText(),
                     Integer.parseInt(age.getText())
                 );
@@ -96,17 +107,6 @@ public class Main {
             JScrollPane scrollPane = new JScrollPane(editorPane);
             scrollPane.setPreferredSize(new java.awt.Dimension(500, 400)); 
             
-            editorPane.addHyperlinkListener(new HyperlinkListener() {
-                @Override
-                public void hyperlinkUpdate(HyperlinkEvent e) {
-                    if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
-                        if ("accion:exportar".equals(e.getDescription())) {
-                            exportarClientes(clienteController);
-                        }
-                    }
-                }
-            }); 
-
             JOptionPane.showMessageDialog(null, editorPane, "Lista de clientes", JOptionPane.PLAIN_MESSAGE);
         });
     }
@@ -124,8 +124,6 @@ public class Main {
             } else {
                 JOptionPane.showMessageDialog(null, "Cliente no encontrado.");
             }
-        }
-    	}
         }
     }
 

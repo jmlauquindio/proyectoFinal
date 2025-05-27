@@ -12,7 +12,7 @@ public class ClienteController {
 				listasClientes = new ArrayList <> ();
 			}
 			
-			public Boolean ingresarCliente (String name, String id,  String phone, String mail, int age) {
+			public Boolean ingresarCliente(String name, String id,  String phone, String mail, int age) {
 				Cliente cliente = new Cliente (name, id, phone, mail, age);
 				this.listasClientes.add (cliente);
 				return true;
@@ -58,13 +58,13 @@ public class ClienteController {
 			    
 			    return null;
 			}
-			public Boolean actualizarCliente (String name, String newId, String newPhone, String newMail, int newAge) {
+			public Boolean actualizarCliente(String name, String newId, String newPhone, String newMail, int newAge) {
 				for (Cliente c: listasClientes) {
 					if (c.getName().equals(name)) {
-						Cliente.setId(newId);
-						Cliente.setPhone(newPhone);
-						Cliente.setMail(newMail);
-						Cliente.setAge(newAge);
+						c.setId(newId);
+						c.setPhone(newPhone);
+						c.setMail(newMail);
+						c.setAge(newAge);
 						return true;
 					}
 				}
