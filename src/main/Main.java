@@ -67,16 +67,29 @@ public class Main {
             	        String seleccionCliente = (String) JOptionPane.showInputDialog(
             	            null, "Seleccione una opción:", "Clientes",
             	            JOptionPane.PLAIN_MESSAGE, null, opcionesClientes, opcionesClientes[0]); 
+	            	        if ("Agregar cliente".equals(seleccionCliente)) {
+	            	            agregarCliente(cliente);
+	            	        } else if ("Listar clientes".equals(seleccionCliente)) {
+	            	        	listaClientes(cliente);
+	            	        } else if ("Buscar cliente".equals(seleccionCliente)) {
+	            	        	buscarCliente(cliente);
+	            	        } else if ("Eliminar cliente".equals(seleccionCliente)) {
+	            	        	eliminarCliente(cliente);
+	            	        } else if ("Ver vehículos del cliente".equals(seleccionCliente)) {
+	            	        	verVehiculosCliente(cliente);
+	            	        }
             	        break;
             	    case 1:  
             	        String[] opcionesVehiculos = {
-            	            "Buscar vehículo",
-            	            "Actualizar vehículo",
+            	            "Buscar vehículo", 
             	            "Volver"
             	        };
             	        String seleccionVehiculo = (String) JOptionPane.showInputDialog(
-            	            null, "Seleccione una opción:", "Vehículos",
+            	            null, "Seleccione una opción:", "Vehículos", 
             	            JOptionPane.PLAIN_MESSAGE, null, opcionesVehiculos, opcionesVehiculos[0]); 
+	            	        if ("Buscar vehículo".equals(seleccionVehiculo)) {
+	            	        	buscarVehiculo(cliente);
+	            	        } 
             	        break;
             	    case 2:  
             	        String[] opcionesAdmin = {
@@ -342,7 +355,7 @@ public class Main {
                         opciones[0]
                     );
                     if (opcion == 0) {
-                        actualizarVehiculo(clienteController, cliente.getId(), placa);
+                    	actualizarVehiculo(clienteController, cliente.getId(), placa);
                     }
                 } else {
                     JOptionPane.showMessageDialog(null, "Vehículo no encontrado.");
