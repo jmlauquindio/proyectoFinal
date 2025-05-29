@@ -169,16 +169,16 @@ public Boolean registrarVehiculo(String placa, String color, String modelo, Obje
 	     return actuales;
 	 }
 	
-public ArrayList<Cliente> isMembresiasActivas() {
-    ArrayList<Cliente> clientes = new ArrayList<>();
-    for (Vehiculo v : listasVehiculos) {
-        if (v.getMembresia() != null && v.getMembresia().isMembresiasActivas()) {
-                Cliente c = v.getClientes();
-            if (!clientes.contains(c)) {
-                clientes.add(c);
-            }
-        }
-    }
-    return clientes;
+	 public ArrayList<Cliente> isMembresiasActivas() {
+		 	ArrayList<Cliente> clientes = new ArrayList<>();
+		 	for (Vehiculo v : listasVehiculos) {
+		 		if (v.getMembresia() != null && v.getMembresia().isMembresiasActivas()) {
+		 			Cliente c = v.getClientes();
+   	            if (!clientes.contains(c)) {
+   	            	clientes.add(c);
+   	            }
+	 		}
+	 	}
+		 return clientes;
     }
 } 
