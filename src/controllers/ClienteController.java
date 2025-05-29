@@ -11,7 +11,7 @@ public class ClienteController {
         listasClientes = new ArrayList<>();
     }
 
-    // Validación para evitar clientes duplicados por ID
+    // Ingresar cliente junto con validación para evitar clientes duplicados por ID
     public Boolean ingresarCliente(String name, String id, String phone, String mail, int age) {
         for (Cliente c : listasClientes) {
             if (c.getId().equals(id)) {

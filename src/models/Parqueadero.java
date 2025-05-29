@@ -2,9 +2,12 @@ package models;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+
 import interfaces.IParqueaderos; 
 
-public abstract class Parqueadero implements IParqueaderos {
+public class Parqueadero implements IParqueaderos {
+	private String id;
     private String name;
     private String direccion;
     private String representante;
@@ -19,7 +22,8 @@ public abstract class Parqueadero implements IParqueaderos {
     private double tarifaCamion;
     private List<Pagos> pagos = new ArrayList<>();
 
-    public Parqueadero(String name, String direccion, String representante,String telefonos, String mediosContactos, int espaciosMotos, int espaciosAutomoviles, int espaciosCamiones) {
+    public Parqueadero(String id, String name, String direccion, String representante, String telefonos, String mediosContactos, int espaciosMotos, int espaciosAutomoviles, int espaciosCamiones) {
+    	this.id = id;
         this.name = name;
         this.direccion = direccion;
         this.representante = representante;
@@ -69,6 +73,14 @@ public abstract class Parqueadero implements IParqueaderos {
 
     public void setEspaciosCamiones(int espaciosCamiones) {
         this.espaciosCamiones = espaciosCamiones;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -164,7 +176,67 @@ public abstract class Parqueadero implements IParqueaderos {
         }
 
         return clientesMenores;
-    } 
+    }
+
+	@Override
+	public void configurarDatos(String name, String direccion, String representante, String telefonos) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void configurarEspacios(TipoVehiculo tipoVehiculo, int cantidad) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void configurarTarifa(TipoVehiculo tipoVehiculo, double tarifaPorHora) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean hayEspacioDisponible(TipoVehiculo tipoVehiculo) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void ocuparEspacio(TipoVehiculo tipoVehiculo) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void liberarEspacio(TipoVehiculo tipoVehiculo) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public double getTarifa(TipoVehiculo tipoVehiculo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Map<String, Integer> getEspaciosDisponibles() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getNaMe() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getTelefonoS() {
+		// TODO Auto-generated method stub
+		return null;
+	} 
     
 
 }

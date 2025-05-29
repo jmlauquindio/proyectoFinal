@@ -7,6 +7,9 @@ public class Membresia {
     private LocalDate fechaFin;
     private double costo;
 
+    public Membresia() {
+    }
+
     public Membresia(LocalDate fechaInicio, LocalDate fechaFin, double costo) {
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
@@ -39,5 +42,9 @@ public class Membresia {
 
     public void setCosto(double costo) {
         this.costo = costo;
+    }
+
+    public void setMonto(double monto) {
+        this.costo = monto;
     }
 }

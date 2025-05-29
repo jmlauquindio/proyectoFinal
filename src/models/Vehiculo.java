@@ -16,6 +16,7 @@ public class Vehiculo{
         this.modelo = modelo;
         this.clientes = new ArrayList<>();
         this.membresia = membresia;
+        this.tipoVehiculo = tipoVehiculo;
 	}
 	public String getPlaca() {
         return placa;
@@ -59,6 +60,10 @@ public class Vehiculo{
 	
 	public TipoVehiculo getTipoVehiculo() {
 		return tipoVehiculo;
+	}
+
+	public String getTipoVehiculoString() {
+		return ""+tipoVehiculo;
 	}
 	public void setTipoVehiculo(TipoVehiculo tipoVehiculo) {
 		this.tipoVehiculo = tipoVehiculo;
