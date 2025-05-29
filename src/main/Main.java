@@ -10,11 +10,16 @@ public class Main {
 
     private static String nombreParqueadero = "Parqueadero Armenia"; 
     private static String direccionParqueadero = "Calle 123 #45-67";
-    private static String telefonoParqueadero = "1234567890";
+    private static String telefonoParqueadero = "333";
     private static String representanteParqueadero = "Julian Martinez"; 
 
 
     public static void main(String[] args) {
+    
+    	ParqueaderoController parqueadero = new ParqueaderoController(); 
+    	
+    	parqueadero.ingresarParqueadero(telefonoParqueadero, nombreParqueadero, direccionParqueadero, representanteParqueadero, telefonoParqueadero, telefonoParqueadero, 50, 20, 10);
+    	  
         ClienteController cliente = new ClienteController();
 
         cliente.ingresarCliente("Juan Pérez", "123", "3123142412", "juanperez@mail.com", 25);
@@ -81,6 +86,7 @@ public class Main {
             	    case 1:  
             	        String[] opcionesVehiculos = {
             	            "Buscar vehículo", 
+            	            "Ver vehículos del cliente",
             	            "Volver"
             	        };
             	        String seleccionVehiculo = (String) JOptionPane.showInputDialog(
@@ -88,7 +94,9 @@ public class Main {
             	            JOptionPane.PLAIN_MESSAGE, null, opcionesVehiculos, opcionesVehiculos[0]); 
 	            	        if ("Buscar vehículo".equals(seleccionVehiculo)) {
 	            	        	buscarVehiculo(cliente);
-	            	        } 
+	            	        } else if ("Ver vehículos del cliente".equals(seleccionVehiculo)) {
+	            	        	verVehiculosCliente(cliente);
+	            	        }
             	        break;
             	    case 2:  
             	        String[] opcionesAdmin = {
@@ -103,12 +111,13 @@ public class Main {
             	            null, "Seleccione una opción:", "Administración Parqueadero",
             	            JOptionPane.PLAIN_MESSAGE, null, opcionesAdmin, opcionesAdmin[0]);
             	        if ("Configurar tarifas".equals(seleccionAdmin)) {
-            	            ParqueaderoController.configurarTarifas();
-            	        } else if ("Pago por período".equals(seleccionAdmin)) {
-            	            ParqueaderoController.pagoPeriodo();
+                            ParqueaderoController.configurarTarifas();
+                        } else if ("Pago por período".equals(seleccionAdmin)) {
+                            ParqueaderoController.pagoPeriodo();
             	        } else if ("Historial de pagos".equals(seleccionAdmin)) {
             	            ParqueaderoController.historialPagos();
             	        } else if ("Puestos disponibles".equals(seleccionAdmin)) { 
+                            ParqueaderoController.puestosDisponibles();
             	        } else if ("Configuración".equals(seleccionAdmin)) {
             	            configuracion();
             	        }
@@ -172,13 +181,13 @@ public class Main {
     //Método para agregar Vehiculos
     public static void agregarVehiculo(ClienteController clienteController, String idCliente) {
         JTextField placa = new JTextField();
-        JTextField tipo = new JTextField();
+        JComboBox<TipoVehiculo> tipoCombo = new JComboBox<>(TipoVehiculo.values());
         JTextField color = new JTextField();
         JTextField modelo = new JTextField();
 
         Object[] campos = {
             "Placa:", placa,
-            "Tipo (Automóvil/Moto/Camión):", tipo,
+            "Tipo:", tipoCombo,
             "Color:", color,
             "Modelo:", modelo
         };
@@ -186,15 +195,17 @@ public class Main {
         int opcion = JOptionPane.showConfirmDialog(null, campos, "Agregar Vehículo", JOptionPane.OK_CANCEL_OPTION);
         if (opcion == JOptionPane.OK_OPTION) {
             try {
-                if (placa.getText().isBlank() || tipo.getText().isBlank() ||
-                    color.getText().isBlank() || modelo.getText().isBlank()) {
+                if (placa.getText().isBlank() || color.getText().isBlank() || modelo.getText().isBlank()) {
                     throw new IllegalArgumentException("Todos los campos son obligatorios.");
                 }
+                TipoVehiculo tipo = (TipoVehiculo) tipoCombo.getSelectedItem();
                 boolean agregado = clienteController.agregarVehiculoACliente(
                     idCliente,
-                    placa.getText(), 
+                    placa.getText(),
                     color.getText(),
-                    modelo.getText()
+                    modelo.getText(), 
+                    false,
+                    tipo
                 );
                 if (agregado) {
                     JOptionPane.showMessageDialog(null, "Vehículo agregado correctamente.");
@@ -420,37 +431,37 @@ public class Main {
             }
         }
     }
-public static void configuracion() {
-    JTextField nombre = new JTextField(nombreParqueadero);
-    JTextField direccion = new JTextField(direccionParqueadero);
-    JTextField telefono = new JTextField(telefonoParqueadero);
-    JTextField representante = new JTextField(representanteParqueadero);
+	public static void configuracion() {
+	    JTextField nombre = new JTextField(nombreParqueadero);
+	    JTextField direccion = new JTextField(direccionParqueadero);
+	    JTextField telefono = new JTextField(telefonoParqueadero);
+	    JTextField representante = new JTextField(representanteParqueadero);
+	
+	    Object[] campos = {
+	        "Nombre del parqueadero:", nombre,
+	        "Dirección:", direccion,
+	        "Teléfono:", telefono,
+	        "Representante:", representante
+	    };
+	
+	    int opcion = JOptionPane.showConfirmDialog(null, campos, "Configuración del Parqueadero", JOptionPane.OK_CANCEL_OPTION);
+	    if (opcion == JOptionPane.OK_OPTION) {
+	        if (nombre.getText().isBlank() || direccion.getText().isBlank() ||
+	            telefono.getText().isBlank() || representante.getText().isBlank()) {
+	            JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios.");
+	            return;
+	        }
+	        nombreParqueadero = nombre.getText();
+	        direccionParqueadero = direccion.getText();
+	        telefonoParqueadero = telefono.getText();
+	        representanteParqueadero = representante.getText();
+	        JOptionPane.showMessageDialog(null, "Datos del parqueadero actualizados correctamente.");
+	    }
+	}
 
-    Object[] campos = {
-        "Nombre del parqueadero:", nombre,
-        "Dirección:", direccion,
-        "Teléfono:", telefono,
-        "Representante:", representante
-    };
-
-    int opcion = JOptionPane.showConfirmDialog(null, campos, "Configuración del Parqueadero", JOptionPane.OK_CANCEL_OPTION);
-    if (opcion == JOptionPane.OK_OPTION) {
-        if (nombre.getText().isBlank() || direccion.getText().isBlank() ||
-            telefono.getText().isBlank() || representante.getText().isBlank()) {
-            JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios.");
-            return;
-        }
-        nombreParqueadero = nombre.getText();
-        direccionParqueadero = direccion.getText();
-        telefonoParqueadero = telefono.getText();
-        representanteParqueadero = representante.getText();
-        JOptionPane.showMessageDialog(null, "Datos del parqueadero actualizados correctamente.");
-    }
-}
-
-	public void factura () {
+	/*public void factura () {
 		String factura = controllers.VehiculoController.generarFacturaTemporal(placa, tipoVehiculo, nombreParqueadero, direccionParqueadero, representanteParqueadero, telefonoParqueadero, horaIngreso, horaSalida, horas, tarifa, monto);
 		JOptionPane.showMessageDialog(null, factura);
-	}
+	}*/
 	
 }
