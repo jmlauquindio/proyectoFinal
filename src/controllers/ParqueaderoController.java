@@ -12,6 +12,7 @@ public class ParqueaderoController {
 	
 	public ParqueaderoController () { 
 	}
+	
 	public Boolean actualizarDatos(String name, String newDireccion, String newRepresentante,String newTelefonos, String newMediosContactos, int newEspaciosMotos, int newEspaciosAutomoviles, int newEspaciosCamiones) {
 		for (Parqueadero parqueadero: listasParqueaderos) {
 			if (parqueadero.getName().equals(name)) {

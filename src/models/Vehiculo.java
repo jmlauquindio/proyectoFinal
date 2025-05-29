@@ -49,7 +49,7 @@ public class Vehiculo{
 		this.clientes = clientes;
 	}
 	
-	public Object getMembredia() {
+	public Object getMembresia() {
 		return membresia;
 	}
 	
@@ -57,9 +57,6 @@ public class Vehiculo{
 		this.membresia = membresia;
 	}
 	
-	public void setMembresia(Object membresia) {
-		this.membresia = membresia;
-	}
 	public TipoVehiculo getTipoVehiculo() {
 		return tipoVehiculo;
 	}

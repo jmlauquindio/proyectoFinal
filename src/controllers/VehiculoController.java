@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
 import javax.swing.JOptionPane;
 import models.*;
 
@@ -26,8 +25,6 @@ public class VehiculoController {
 			System.out.println (e.getPlaca () + " " + e.getColor() +" " + e.getModelo());
 			}
 		}
-	
-	
 
 	public String buscarVehiculoComoTexto(Cliente clientes, String placa, TipoVehiculo tipoVehiculo) {
 	    for (Vehiculo vehiculo : listasVehiculos) { 
@@ -62,7 +59,6 @@ public class VehiculoController {
         espaciosDisponibles.put(tipoVehiculo, cantidad);
     }
 
-    // Configura la tarifa por hora por tipo de vehículo
     public void configurarTarifa(String tipoVehiculo, double tarifa) {
         tarifasPorHora.put(tipoVehiculo, tarifa);
     }
@@ -88,7 +84,6 @@ public class VehiculoController {
         return true;
     }
 
-    // Salida de vehículo temporal y generación de factura
     public void salidaVehiculoTemporal(String placa, String tipoVehiculo, String nombreParqueadero, String direccion, String representante, String telefonos) {
         LocalDateTime horaIngreso = ingresosTemporales.get(placa);
         if (horaIngreso == null) {
@@ -130,5 +125,52 @@ public class VehiculoController {
         JOptionPane.showMessageDialog(null, factura);
         return factura;
     }
-
-} 
+	
+	 public ArrayList<Vehiculo> historialVehiculosPorCliente(Cliente cliente) {
+	     ArrayList<Vehiculo> historial = new ArrayList<>();
+	     for (Vehiculo v : listasVehiculos) {
+	         if (v.getClientes().equals(cliente)) {
+	             historial.add(v);
+	         }
+	     }
+	     return historial;
+	 }
+	
+	 private ArrayList<Factura> facturas = new ArrayList<>(); 
+	
+	 public double totalIngresosPorPeriodo(int year, int month, int day) {
+	     double total = 0;
+	     for (Factura f : facturas) {
+	         LocalDateTime fecha = f.getFecha();
+	         if ((year == 0 || fecha.getYear() == year) &&
+	             (month == 0 || fecha.getMonthValue() == month) &&
+	             (day == 0 || fecha.getDayOfMonth() == day)) {
+	             total += f.getMontoTotal();
+	         }
+	     }
+	     return total;
+	 }
+	
+	 public ArrayList<String> vehiculosActualesEnParqueadero() {
+	     ArrayList<String> actuales = new ArrayList<>();
+	     actuales.addAll(ingresosTemporales.keySet());
+	     if (membresiasActivas != null) {
+	         actuales.addAll(membresiasActivas.keySet());
+	     }
+	     
+	     return actuales;
+	 }
+	
+	 public ArrayList<Cliente> clientesConMembresiasActivas() {
+	     ArrayList<Cliente> clientes = new ArrayList<>();
+	     for (Vehiculo v : listasVehiculos) {
+	         if (v.getMembresia() != null && v.getMembresia().isActiva()) {
+	             Cliente c = v.getClientes();
+	             if (!clientes.contains(c)) {
+	                 clientes.add(c);
+	             }
+	         }
+	     }
+	     return clientes;
+	 }
+	} 
