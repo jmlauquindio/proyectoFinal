@@ -1,5 +1,7 @@
-package models;
+package interfaces;
 import java.util.Map;
+import models.TipoVehiculo;
+
 public interface IParqueaderos {
 	    void configurarDatos(String name, String direccion, String representante, String telefonos);
 	    void configurarEspacios(TipoVehiculo tipoVehiculo, int cantidad);
@@ -14,4 +16,5 @@ public interface IParqueaderos {
 	    String getDireccion();
 	    String getRepresentante();
 	    String getTelefonoS();
+
 	}

@@ -1,7 +1,5 @@
 package models;
-
 import java.util.ArrayList;
-import java.util.List;
 
 public class Cliente {
     private String name;
@@ -91,7 +89,6 @@ public class Cliente {
 	//Agrega vehiculo del cliente
     public boolean agregarVehiculo(Vehiculo vehiculo) { 
         for (Vehiculo v : vehiculos) {
-        	//Devuelve en false si ya aexiste un vehiculo con esa placa
             if (v.getPlaca().equalsIgnoreCase(vehiculo.getPlaca())) {
                 return false; 
             }

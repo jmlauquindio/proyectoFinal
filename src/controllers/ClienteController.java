@@ -61,9 +61,9 @@ public class ClienteController {
         return null;
     }
     public String buscarClientePorIdComoTexto(String id) {
-        Cliente cliente = getClientePorId(id); // Asumiendo que tienes este método
+        Cliente cliente = getClientePorId(id);
         if (cliente != null) {
-            return cliente.toString(); // O el formato que prefieras
+            return cliente.toString();
         }
         return null;
     }
@@ -96,16 +96,16 @@ public class ClienteController {
     }
     
     //Agregar vehiculo
-    public boolean agregarVehiculoACliente(String idCliente, String placa, String color, String modelo) {
+    public boolean agregarVehiculoACliente(String idCliente, String placa, String color, String modelo, boolean membresia, TipoVehiculo tipoVehiculo) {
         Cliente cliente = getClientePorId(idCliente); 
         if (cliente != null) {
-            Vehiculo vehiculo = new Vehiculo(placa, color, modelo, null);  
+            Vehiculo vehiculo = new Vehiculo(placa, color, modelo, membresia, tipoVehiculo);  
             return cliente.agregarVehiculo(vehiculo); 
         }
         return false; 
     }
     
-    //Obtener información de vehiculos de un cliente, en String
+    //Obtener información de vehiculos de un cliente
     public String getVehiculosClienteComoTexto(String idCliente) {
         Cliente cliente = getClientePorId(idCliente);  
         if (cliente != null) {

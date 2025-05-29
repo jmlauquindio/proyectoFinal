@@ -1,4 +1,5 @@
-package models;
+package interfaces;
+import models.Cliente;
 
 public interface IVehiculos {
 	    String getPlaca();

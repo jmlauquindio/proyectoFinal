@@ -1,5 +1,11 @@
 package controllers;
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.swing.JOptionPane;
 import models.*;
 
 public class VehiculoController {
@@ -10,8 +16,8 @@ public class VehiculoController {
 		listasVehiculos = new ArrayList <> ();
 		}
 	
-	public Boolean registrarVehiculo (String placa,  String color, String modelo, Object membresia) {
-		Vehiculo vehiculo = new Vehiculo (placa, color, modelo, membresia);
+	public Boolean registrarVehiculo (String placa,  String color, String modelo, Object membresia, TipoVehiculo tipoVehiculo) {
+		Vehiculo vehiculo = new Vehiculo (placa, color, modelo, membresia, tipoVehiculo);
 		this.listasVehiculos.add (vehiculo);
 		return true;
 	}
@@ -23,12 +29,15 @@ public class VehiculoController {
 	
 	
 
-	public String buscarVehiculoComoTexto(Cliente clientes, String placa, String Cliente) {
+	public String buscarVehiculoComoTexto(Cliente clientes, String placa, TipoVehiculo tipoVehiculo) {
 	    for (Vehiculo vehiculo : listasVehiculos) { 
-	        if (vehiculo.getPlaca().equals(placa)) {  
+	        if (vehiculo.getPlaca().equals(placa)) {
+	        	if (vehiculo.getClientes().equals(clientes)) {
+	        		if (vehiculo.getTipoVehiculo().equals(tipoVehiculo))
 	        			return "Placa: " + vehiculo.getPlaca() + 
 	                   "\nCliente: " + vehiculo.getClientes(); 
 	        }
+	       }
 	      }
 	    return "Vehículo no encontrado.";
 	 }
@@ -43,5 +52,83 @@ public class VehiculoController {
 				}
 			}
 			return false;
-		}
-}
+	 }
+
+    // control de espacios disponibles
+    private Map<String, Integer> espaciosDisponibles = new HashMap<>();
+    private Map<String, Double> tarifasPorHora = new HashMap<>();
+    
+    public void configurarEspacios(String tipoVehiculo, int cantidad) {
+        espaciosDisponibles.put(tipoVehiculo, cantidad);
+    }
+
+    // Configura la tarifa por hora por tipo de vehículo
+    public void configurarTarifa(String tipoVehiculo, double tarifa) {
+        tarifasPorHora.put(tipoVehiculo, tarifa);
+    }
+
+    // registro de ingreso de vehículos temporales
+    private Map<String, LocalDateTime> ingresosTemporales = new HashMap<>();
+ 
+    public boolean ingresosVehiculosTemporales(String placa, String color, String modelo, String tipoVehiculo) {
+        int espacios = espaciosDisponibles.getOrDefault(tipoVehiculo, 0);
+        if (espacios <= 0) {
+            JOptionPane.showMessageDialog(null, "No hay espacios disponibles para este tipo de vehículo.");
+            return false;
+        }
+        espaciosDisponibles.put(tipoVehiculo, espacios - 1);
+        ingresosTemporales.put(placa, LocalDateTime.now());
+        String mensaje = "Ingreso de vehículo temporal:\n"
+                + "Placa: " + placa
+                + "\nColor: " + color
+                + "\nModelo: " + modelo
+                + "\nTipo: " + tipoVehiculo
+                + "\nHora de ingreso: " + LocalDateTime.now();
+        JOptionPane.showMessageDialog(null, mensaje);
+        return true;
+    }
+
+    // Salida de vehículo temporal y generación de factura
+    public void salidaVehiculoTemporal(String placa, String tipoVehiculo, String nombreParqueadero, String direccion, String representante, String telefonos) {
+        LocalDateTime horaIngreso = ingresosTemporales.get(placa);
+        if (horaIngreso == null) {
+            JOptionPane.showMessageDialog(null, "No se encontró registro de ingreso para la placa: " + placa);
+            return;
+        }
+        LocalDateTime horaSalida = LocalDateTime.now();
+        Duration duracion = Duration.between(horaIngreso, horaSalida);
+        long horas = duracion.toHours();
+        if (duracion.toMinutes() % 60 != 0) {
+            horas++;
+        }
+        double tarifa = tarifasPorHora.getOrDefault(tipoVehiculo, 0.0);
+        double monto = tarifa * horas;
+        int espacios = espaciosDisponibles.getOrDefault(tipoVehiculo, 0);
+        espaciosDisponibles.put(tipoVehiculo, espacios + 1);
+        ingresosTemporales.remove(placa);
+
+        generarFacturaTemporal(placa, tipoVehiculo, nombreParqueadero, direccion, representante, telefonos, horaIngreso, horaSalida, horas, tarifa, monto);
+        }
+
+    public static String generarFacturaTemporal(String placa, String tipoVehiculo, String nombreParqueadero, String direccion, String representante, String telefonos, LocalDateTime horaIngreso, LocalDateTime horaSalida, long horas, double tarifa, double monto) {
+
+        String factura = "----- FACTURA PARQUEADERO -----\n"
+                + "Parqueadero: " + nombreParqueadero + "\n"
+                + "Dirección: " + direccion + "\n"
+                + "Representante: " + representante + "\n"
+                + "Teléfonos: " + telefonos + "\n"
+                + "------------------------------\n"
+                + "Placa: " + placa + "\n"
+                + "Tipo: " + tipoVehiculo + "\n"
+                + "Hora ingreso: " + horaIngreso + "\n"
+                + "Hora salida: " + horaSalida + "\n"
+                + "Horas cobradas: " + horas + "\n"
+                + "Tarifa por hora: $" + tarifa + "\n"
+                + "Total a pagar: $" + monto + "\n"
+                + "------------------------------";
+
+        JOptionPane.showMessageDialog(null, factura);
+        return factura;
+    }
+
+} 

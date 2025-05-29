@@ -1,11 +1,10 @@
 package main;
-
-import javax.swing.*;
 import controllers.*;
-import models.Cliente;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import javax.swing.*;
+import models.*;
 
 public class Main {
 
@@ -448,4 +447,10 @@ public static void configuracion() {
         JOptionPane.showMessageDialog(null, "Datos del parqueadero actualizados correctamente.");
     }
 }
+
+	public void factura () {
+		String factura = controllers.VehiculoController.generarFacturaTemporal(placa, tipoVehiculo, nombreParqueadero, direccionParqueadero, representanteParqueadero, telefonoParqueadero, horaIngreso, horaSalida, horas, tarifa, monto);
+		JOptionPane.showMessageDialog(null, factura);
+	}
+	
 }

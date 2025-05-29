@@ -1,7 +1,8 @@
 package models;
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List; 
+import java.util.List;
+import interfaces.IParqueaderos; 
 
 public abstract class Parqueadero implements IParqueaderos {
     private String name;

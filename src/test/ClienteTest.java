@@ -3,14 +3,10 @@ package test;
 import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.util.Arrays;
 import java.util.List;
-
 import org.junit.jupiter.api.Test;
-
-import models.Cliente;
-import models.Parqueadero;
+import models.*;
 
 public class ClienteTest {
 

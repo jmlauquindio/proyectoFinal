@@ -8,8 +8,9 @@ public class Vehiculo{
     private String modelo;
     private ArrayList<Cliente> clientes;
     private Object membresia; 
+    private TipoVehiculo tipoVehiculo;
 
-	public Vehiculo(String placa, String color, String modelo, Object membresia) {
+	public Vehiculo(String placa, String color, String modelo, Object membresia,TipoVehiculo tipoVehiculo) {
         this.placa = placa; 
         this.color = color;
         this.modelo = modelo;
@@ -48,7 +49,7 @@ public class Vehiculo{
 		this.clientes = clientes;
 	}
 	
-	public Object gteMembredia() {
+	public Object getMembredia() {
 		return membresia;
 	}
 	
@@ -56,9 +57,19 @@ public class Vehiculo{
 		this.membresia = membresia;
 	}
 	
-	@Override
-    public String toString() {
-        return "Vehiculo placa=" + placa + ", color=" + color + ", modelo=" + modelo;
+	public void setMembresia(Object membresia) {
+		this.membresia = membresia;
+	}
+	public TipoVehiculo getTipoVehiculo() {
+		return tipoVehiculo;
+	}
+	public void setTipoVehiculo(TipoVehiculo tipoVehiculo) {
+		this.tipoVehiculo = tipoVehiculo;
 	}
 	
+	@Override
+    public String toString() {
+        return "Vehiculo placa=" + placa + ", color=" + color + ", modelo=" + modelo + ",tipovehiculo=" + tipoVehiculo;
+	}
+
 }
