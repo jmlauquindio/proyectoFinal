@@ -13,7 +13,7 @@ public class Membresia {
         this.costo = costo;
     }
 
-    public boolean estaVigente() {
+    public boolean isMembresiasActivas() {
         return LocalDate.now().isBefore(fechaFin);
     }
 

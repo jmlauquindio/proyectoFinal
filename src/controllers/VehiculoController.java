@@ -15,11 +15,20 @@ public class VehiculoController {
 		listasVehiculos = new ArrayList <> ();
 		}
 	
-	public Boolean registrarVehiculo (String placa,  String color, String modelo, Object membresia, TipoVehiculo tipoVehiculo) {
-		Vehiculo vehiculo = new Vehiculo (placa, color, modelo, membresia, tipoVehiculo);
-		this.listasVehiculos.add (vehiculo);
-		return true;
-	}
+public Boolean registrarVehiculo(String placa, String color, String modelo, Object membresia, TipoVehiculo tipoVehiculo) {
+    Vehiculo vehiculo;
+    if (tipoVehiculo == TipoVehiculo.AUTOMOVIL) {
+        vehiculo = new Automovil(placa, color, modelo, membresia, tipoVehiculo);
+    } else if (tipoVehiculo == TipoVehiculo.MOTO) {
+        vehiculo = new Moto(placa, color, modelo, membresia, tipoVehiculo);
+    } else if (tipoVehiculo == TipoVehiculo.CAMION) {
+        vehiculo = new Camion(placa, color, modelo, membresia, tipoVehiculo);
+    } else {
+        vehiculo = new Vehiculo(placa, color, modelo, membresia, tipoVehiculo);
+    }
+    this.listasVehiculos.add(vehiculo);
+    return true;
+}
 	public void getlistaVehiculo () {
 		for (Vehiculo e: listasVehiculos) {
 			System.out.println (e.getPlaca () + " " + e.getColor() +" " + e.getModelo());
@@ -157,20 +166,19 @@ public class VehiculoController {
 	     if (membresiasActivas != null) {
 	         actuales.addAll(membresiasActivas.keySet());
 	     }
-	     
 	     return actuales;
 	 }
 	
-	 public ArrayList<Cliente> clientesConMembresiasActivas() {
-	     ArrayList<Cliente> clientes = new ArrayList<>();
-	     for (Vehiculo v : listasVehiculos) {
-	         if (v.getMembresia() != null && v.getMembresia().isActiva()) {
-	             Cliente c = v.getClientes();
-	             if (!clientes.contains(c)) {
-	                 clientes.add(c);
-	             }
-	         }
-	     }
-	     return clientes;
-	 }
-	} 
+public ArrayList<Cliente> isMembresiasActivas() {
+    ArrayList<Cliente> clientes = new ArrayList<>();
+    for (Vehiculo v : listasVehiculos) {
+        if (v.getMembresia() != null && v.getMembresia().isMembresiasActivas()) {
+                Cliente c = v.getClientes();
+            if (!clientes.contains(c)) {
+                clientes.add(c);
+            }
+        }
+    }
+    return clientes;
+    }
+} 
