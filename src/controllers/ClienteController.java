@@ -99,13 +99,44 @@ public class ClienteController {
     }
     
     //Agregar vehiculo
-    public boolean agregarVehiculoACliente(String idCliente, String placa, TipoVehiculo tipoVehiculo, boolean membresia, String color, String modelo) {
-        Cliente cliente = getClientePorId(idCliente); 
-        if (cliente != null) {
-            Vehiculo vehiculo = new Vehiculo(placa, color, modelo, membresia, tipoVehiculo);  
-            return cliente.agregarVehiculo(vehiculo); 
+    public boolean agregarVehiculoACliente(String idCliente, String placa, TipoVehiculo tipo, boolean membresia, String color, String modelo) {
+        Cliente cliente = getClientePorId(idCliente);
+        if (cliente == null) {
+            JOptionPane.showMessageDialog(null, "Cliente no encontrado.");
+            return false;
         }
-        return false; 
+        
+        Parqueadero parqueadero = ParqueaderoController.listasParqueaderos.get(0);
+        
+        if (membresia) {
+            switch (tipo) {
+                case AUTOMOVIL:
+                    if (parqueadero.getEspaciosAutomoviles() <= 0) {
+                        JOptionPane.showMessageDialog(null, "No hay cupos para carros.");
+                        return false;
+                    }
+                    parqueadero.setEspaciosAutomoviles(parqueadero.getEspaciosAutomoviles() - 1);
+                    break;
+                case MOTO:
+                    if (parqueadero.getEspaciosMotos() <= 0) {
+                        JOptionPane.showMessageDialog(null, "No hay cupos para motos.");
+                        return false;
+                    }
+                    parqueadero.setEspaciosMotos(parqueadero.getEspaciosMotos() - 1);
+                    break;
+                case CAMION:
+                    if (parqueadero.getEspaciosCamiones() <= 0) {
+                        JOptionPane.showMessageDialog(null, "No hay cupos para camiones.");
+                        return false;
+                    }
+                    parqueadero.setEspaciosCamiones(parqueadero.getEspaciosCamiones() - 1);
+                    break;
+            }
+        }
+
+        Vehiculo vehiculo = new Vehiculo(placa, color, modelo, membresia, tipo);
+        cliente.getVehiculos().add(vehiculo);
+        return true;
     }
     
     //Obtener información de vehiculos de un cliente
