@@ -29,6 +29,9 @@ public class ClienteController {
             System.out.println(e.getName() + " " + e.getId());
         }
     }
+    public ArrayList<Cliente> getClientes(){
+    	return this.listasClientes;
+    }
 
     public boolean eliminarCliente(String idCliente) {
         for (Cliente e : listasClientes) {
@@ -96,7 +99,7 @@ public class ClienteController {
     }
     
     //Agregar vehiculo
-    public boolean agregarVehiculoACliente(String idCliente, String placa, String color, String modelo, boolean membresia, TipoVehiculo tipoVehiculo) {
+    public boolean agregarVehiculoACliente(String idCliente, String placa, TipoVehiculo tipoVehiculo, boolean membresia, String color, String modelo) {
         Cliente cliente = getClientePorId(idCliente); 
         if (cliente != null) {
             Vehiculo vehiculo = new Vehiculo(placa, color, modelo, membresia, tipoVehiculo);  

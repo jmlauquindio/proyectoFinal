@@ -25,6 +25,12 @@ public class Main {
         cliente.ingresarCliente("Juan Pérez", "123", "3123142412", "juanperez@mail.com", 25);
         cliente.ingresarCliente("Ana Gómez", "321", "231232142", "anagomez@mail.com", 17);
 
+        Parqueadero parqueaderoObj = ParqueaderoController.listasParqueaderos.get(0);
+        parqueaderoObj.setClientes(cliente.getClientes()); 
+        
+        cliente.agregarVehiculoACliente("123", "QWE", TipoVehiculo.AUTOMOVIL, true, "Rojo", "Mazda 3");
+        cliente.agregarVehiculoACliente("321", "ASD", TipoVehiculo.MOTO, true, "Negro", "Yamaha FZ");  
+
         mostrarMenu(cliente);
     }
 
@@ -202,11 +208,11 @@ public class Main {
                 boolean agregado = clienteController.agregarVehiculoACliente(
                     idCliente,
                     placa.getText(),
+                    tipo,
+                    true,
                     color.getText(),
-                    modelo.getText(), 
-                    false,
-                    tipo
-                );
+                    modelo.getText() 
+                ); 
                 if (agregado) {
                     JOptionPane.showMessageDialog(null, "Vehículo agregado correctamente.");
                 } else {
