@@ -160,11 +160,11 @@ public class VehiculoController {
 	     return total;
 	 }
 	
-	 public ArrayList<String> vehiculosActualesEnParqueadero() {
+	 public ArrayList<String> vehiculosActualesEnParqueadero(String membresiasActivas) {
 	     ArrayList<String> actuales = new ArrayList<>();
 	     actuales.addAll(ingresosTemporales.keySet());
 	     if (membresiasActivas != null) {
-	         actuales.addAll(membresiasActivas.keySet());
+	         actuales.add(membresiasActivas);
 	     }
 	     return actuales;
 	 }
@@ -172,10 +172,10 @@ public class VehiculoController {
 	 public ArrayList<Cliente> isMembresiasActivas() {
 		 	ArrayList<Cliente> clientes = new ArrayList<>();
 		 	for (Vehiculo v : listasVehiculos) {
-		 		if (v.getMembresia() != null && v.getMembresia().isMembresiasActivas()) {
-		 			Cliente c = v.getClientes();
+		 		if (v.getMembresia() != null) {
+		 			ArrayList<Cliente> c = v.getClientes();
    	            if (!clientes.contains(c)) {
-   	            	clientes.add(c);
+   	            	clientes.addAll(c);
    	            }
 	 		}
 	 	}
