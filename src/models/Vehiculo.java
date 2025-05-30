@@ -3,12 +3,12 @@ package models;
 import java.util.ArrayList;
 
 public class Vehiculo{
-    private String placa; 
-    private String color;
-    private String modelo;
-    private ArrayList<Cliente> clientes;
-    private Object membresia; 
-    private TipoVehiculo tipoVehiculo;
+	protected String placa;
+	protected String color;
+    protected String modelo;
+    protected ArrayList<Cliente> clientes;
+    protected Object membresia; 
+    protected TipoVehiculo tipoVehiculo;
 
 	public Vehiculo(String placa, String color, String modelo, Object membresia,TipoVehiculo tipoVehiculo) {
         this.placa = placa; 
